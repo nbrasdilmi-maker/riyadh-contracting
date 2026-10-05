@@ -1,0 +1,123 @@
+/* Design Lab v3 — نظام ثلاثة ألوان: فحمي #10110F / عاجي #F3F0E8 / ذهبي #C7A56A */
+.lab-scope {
+  --lab-base: #10110f;
+  --lab-base2: #10110f;
+  --lab-surface: #161614;
+  --lab-surface2: #1e1e1a;
+  --lab-ivory: #f3f0e8;
+  --lab-ivory-deep: #e9e4d6;
+  --lab-gold: #c7a56a;
+  --lab-gold-deep: #9a7434;
+  --lab-gold-light: #ecd9ac;
+  --lab-champagne: linear-gradient(135deg, #f3e3b3 0%, #c7a56a 45%, #8a6530 100%);
+  --lab-ivory: #f4f1eb;
+  --lab-muted: #b3aca1;
+  --lab-border: rgba(199, 165, 106, 0.18);
+  --lab-border-soft: rgba(255, 255, 255, 0.08);
+  --lab-glow: 0 0 0 1px rgba(199, 165, 106, 0.25), 0 8px 32px rgba(199, 165, 106, 0.18), 0 20px 60px rgba(0, 0, 0, 0.5);
+  --lab-shadow-card: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --lab-radius-card: 20px;
+  --lab-radius-btn: 14px;
+  --lab-font-head: "IBM Plex Sans Arabic", "Tajawal", Arial, sans-serif;
+  --lab-font-body: "Tajawal", "IBM Plex Sans Arabic", Arial, sans-serif;
+  background:
+    radial-gradient(900px 420px at 85% -5%, rgba(199, 165, 106, 0.14), transparent 60%),
+    radial-gradient(700px 380px at 10% 10%, rgba(199, 165, 106, 0.08), transparent 60%),
+    linear-gradient(180deg, var(--lab-base) 0%, var(--lab-base2) 100%);
+  color: var(--lab-ivory);
+  font-family: var(--lab-font-body);
+  min-height: 100vh;
+}
+.lab-scope * { box-sizing: border-box; }
+.lab-container { max-width: 1200px; margin-inline: auto; padding-inline: 1rem; }
+@media (min-width: 768px) { .lab-container { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .lab-container { padding-inline: 2rem; } }
+.lab-section { padding-block: 2.75rem; }
+@media (min-width: 1024px) { .lab-section { padding-block: 4.5rem; } }
+.lab-h1 { font-family: var(--lab-font-head); font-size: clamp(2.2rem, 8vw, 4.6rem); line-height: 1.18; font-weight: 700; letter-spacing: -0.02em; }
+.lab-h2 { font-family: var(--lab-font-head); font-size: clamp(1.35rem, 4vw, 2rem); line-height: 1.5; font-weight: 700; }
+.lab-muted { color: var(--lab-muted); }
+.lab-gradient-text { background: var(--lab-champagne); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lab-gold-text { color: var(--lab-gold-light); }
+
+/* الأقسام الفاتحة — عاجي */
+.lab-section-light { background: var(--lab-ivory); color: #191510; }
+.lab-section-light .lab-h2 { color: #141412; }
+.lab-section-light .lab-muted { color: #5f5a50; }
+.lab-section-light .lab-gold-text { color: #8a6530; }
+.lab-section-light .lab-card {
+  background: #ffffff;
+  border: 1px solid rgba(16, 17, 15, 0.1);
+  box-shadow: 0 14px 34px rgba(16, 17, 15, 0.1);
+}
+.lab-section-light .lab-card:hover { box-shadow: 0 18px 44px rgba(138, 101, 48, 0.22); border-color: rgba(199, 165, 106, 0.55); }
+.lab-section-light .lab-card p { color: #2b2925; }
+.lab-section-light .lab-input { background: #fff; border-color: rgba(16,17,15,0.15); color: #191510; }
+
+/* سطح شمبين متدرج لامع بحركة فخمة — فوق الأقسام الفاتحة */
+.lab-luminous {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: linear-gradient(115deg, #f6f2e9 0%, #f5e6c6 28%, #eedcb6 50%, #f5e9cd 72%, #f6f2e9 100%);
+  background-size: 280% 280%;
+  animation: lab-lumi-shift 16s ease-in-out infinite;
+}
+@keyframes lab-lumi-shift { 0%, 100% { background-position: 0% 40%; } 50% { background-position: 100% 60%; } }
+.lab-luminous::before {
+  content: ""; position: absolute; inset: -20%; z-index: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.55) 50%, transparent 58%);
+  transform: translateX(-70%);
+  animation: lab-lumi-sheen 8s ease-in-out infinite;
+}
+@keyframes lab-lumi-sheen { 0%, 55% { transform: translateX(-70%); } 92%, 100% { transform: translateX(70%); } }
+.lab-luminous > * { position: relative; z-index: 1; }
+.lab-orb { position: absolute; border-radius: 50%; filter: blur(60px); z-index: 0 !important; pointer-events: none; animation: lab-float 9s ease-in-out infinite; }
+
+/* بطاقات فاخرة مدمجة */
+.lab-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)) padding-box, linear-gradient(135deg, rgba(199,165,106,0.35), rgba(255,255,255,0.06) 40%, rgba(199,165,106,0.2)) border-box;
+  border: 1px solid transparent;
+  border-radius: var(--lab-radius-card);
+  box-shadow: var(--lab-shadow-card);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.lab-card:hover { transform: translateY(-6px); box-shadow: var(--lab-glow); }
+.lab-card .lab-shine { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.14) 50%, transparent 60%); transform: translateX(-120%); transition: transform 0.8s ease; }
+.lab-card:hover .lab-shine { transform: translateX(120%); }
+.lab-card-media { position: relative; overflow: hidden; }
+.lab-card-media img { transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease; }
+.lab-card:hover .lab-card-media img { transform: scale(1.08); filter: saturate(1.1); }
+
+/* أزرار */
+.lab-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; min-height: 48px; padding: 0.7rem 1.25rem; border-radius: var(--lab-radius-btn); font-weight: 700; font-size: 0.95rem; border: 1px solid transparent; cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease; position: relative; overflow: hidden; }
+.lab-btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--lab-gold-light); outline-offset: 3px; }
+.lab-btn-primary { background: var(--lab-champagne); color: #191510; box-shadow: 0 6px 24px rgba(199, 165, 106, 0.35); }
+.lab-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 34px rgba(199, 165, 106, 0.5); }
+.lab-btn-primary::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.5) 50%, transparent 60%); transform: translateX(-130%); transition: transform 0.7s ease; }
+.lab-btn-primary:hover::after { transform: translateX(130%); }
+.lab-btn-ghost { background: rgba(255,255,255,0.04); border-color: var(--lab-border-soft); color: var(--lab-ivory); backdrop-filter: blur(8px); }
+.lab-btn-ghost:hover { border-color: var(--lab-gold); box-shadow: 0 0 20px rgba(199,165,106,0.25); }
+
+/* شارات زجاجية */
+.lab-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.16); color: #fff; background: rgba(10, 10, 8, 0.55); backdrop-filter: blur(10px); box-shadow: 0 4px 16px rgba(0,0,0,0.35); }
+.lab-badge-gold { border-color: rgba(199,165,106,0.5); color: var(--lab-gold-light); background: rgba(199,165,106,0.14); box-shadow: 0 0 18px rgba(199,165,106,0.3); }
+.lab-input { width: 100%; min-height: 48px; padding: 0.7rem 1rem; border-radius: var(--lab-radius-btn); background: rgba(255,255,255,0.05); border: 1px solid var(--lab-border-soft); color: var(--lab-ivory); font-size: 16px; }
+.lab-input::placeholder { color: var(--lab-muted); }
+.lab-input:focus { border-color: var(--lab-gold); box-shadow: 0 0 0 3px rgba(199,165,106,0.2); outline: none; }
+
+/* شبكات مدمجة منظمة */
+.lab-grid-cards { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .lab-grid-cards { grid-template-columns: 1fr 1fr; gap: 16px; } }
+@media (min-width: 1100px) { .lab-grid-cards { grid-template-columns: 1fr 1fr 1fr; gap: 20px; } }
+
+/* حركات */
+@keyframes lab-kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.12); } }
+@keyframes lab-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes lab-pulse-glow { 0%,100% { box-shadow: 0 0 18px rgba(199,165,106,0.35); } 50% { box-shadow: 0 0 34px rgba(199,165,106,0.6); } }
+.lab-kenburns { animation: lab-kenburns 18s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .lab-scope *, .lab-scope *::before, .lab-scope *::after { animation: none !important; transition: none !important; }
+  .lab-luminous { animation: none; background: var(--lab-ivory); }
+  .lab-luminous::before, .lab-orb { display: none; }
+}
