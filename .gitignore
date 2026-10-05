@@ -35,6 +35,9 @@ yarn-error.log*
 
 # reference archive (local only, not needed on Vercel)
 old-site-content/images/
+old-site-content/*.md
+old-site-content/subpages/
+PROJECT_MEMORY.txt
 
 # vercel
 .vercel
