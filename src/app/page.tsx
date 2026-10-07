@@ -13,9 +13,29 @@ export default function HomePage() {
   const { sections, loading } = useLabSections();
   const covers = sections.filter((s) => s.active).map((s) => s.cover);
   const heroCovers = covers.length > 0 ? covers : labHeroCovers;
+  const businessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    name: "شبكة التميز للمقاولات العامة",
+    description:
+      "مقاولات عامة بالرياض: مظلات، سواتر، برجولات، شبوك، خيام، دهانات وديكورات.",
+    telephone: "+966551215610",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "الرياض",
+      addressCountry: "SA",
+    },
+    openingHours: "Mo-Su 08:00-22:00",
+    priceRange: "SAR",
+    areaServed: "الرياض",
+  };
 
   return (
     <div className="lab-scope">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+      />
       <LabHeader />
       <main>
         <LabHero covers={heroCovers} />
